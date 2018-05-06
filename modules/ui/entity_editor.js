@@ -42,6 +42,8 @@ export function uiEntityEditor(context) {
     function entityEditor(selection) {
         var entity = context.entity(_entityID);
         var tags = _clone(entity.tags);
+        tags.my_read_only_tag = 'this is fake value';
+        var readOnlyTags = [/^my_read_only_tag$/]
 
         // Header
         var header = selection.selectAll('.header')
@@ -157,6 +159,7 @@ export function uiEntityEditor(context) {
             .call(rawTagEditor
                 .preset(_activePreset)
                 .entityID(_entityID)
+                .readOnlyTags(readOnlyTags)
                 .tags(tags)
                 .state(_state)
             );
